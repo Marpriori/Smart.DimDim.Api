@@ -8,7 +8,7 @@ namespace Smart.Dimdim.Api.Models
 {
     public class Entidade
     {
-        [Column("_ID")]
-        public int _id { get; set; }
+        [Column("ID")]
+        public int Id { get; set; }
     }
 }
