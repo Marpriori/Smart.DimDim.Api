@@ -7,8 +7,12 @@ using System.Web;
 
 namespace Smart.Dimdim.Api.Database
 {
-    internal class SmartDimdimContext: DbContext
+    public class SmartDimdimContext:DbContext
     {
+        public SmartDimdimContext()
+            : base("name=SmartDimdimContext")
+        {
+        }
         public DbSet<Usuario> Usuarios { get; set; }
     }
 }
