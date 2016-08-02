@@ -39,7 +39,8 @@ namespace Smart.Dimdim.Api.Controllers
         [Queryable]
         public SingleResult<Usuario> GetUsuario([FromODataUri] int key)
         {
-            return SingleResult.Create(db.Usuarios.Where(usuario => usuario.Id == key));
+            var abc = SingleResult.Create(db.Usuarios.Where(usuario => usuario.Id == key));
+            return abc;
         }
 
         // PUT odata/Usuario(5)
