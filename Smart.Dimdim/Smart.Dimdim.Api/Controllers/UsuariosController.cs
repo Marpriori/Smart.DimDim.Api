@@ -2,10 +2,11 @@
 using Smart.Dimdim.Api.Models;
 using System.Linq;
 using System.Web.Http;
+using System.Web.Http.OData;
 
 namespace Smart.Dimdim.Api.Controllers
 {
-    public class UsuariosController : System.Web.Http.OData.EntitySetController<Usuario,int>
+    public class UsuariosController : EntitySetController<Usuario,int>
     {
         SmartDimdimContext ctx = new SmartDimdimContext();
 

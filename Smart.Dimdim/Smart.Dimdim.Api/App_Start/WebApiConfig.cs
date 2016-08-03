@@ -19,6 +19,7 @@ namespace Smart.Dimdim.Api
         {
             var builder = new ODataConventionModelBuilder();
             builder.EntitySet<Usuario>("Usuarios");
+            builder.EntitySet<Conta>("Contas");
             
             return builder.GetEdmModel();
         }

@@ -14,5 +14,6 @@ namespace Smart.Dimdim.Api.Database
         {
         }
         public DbSet<Usuario> Usuarios { get; set; }
+        public DbSet<Conta> Contas { get; set; }
     }
 }
