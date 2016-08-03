@@ -22,7 +22,7 @@ namespace Smart.Dimdim.Api.Controllers
 
         // GET odata/contas
         [Queryable]
-        public IQueryable<Conta> Getcontas()
+        public IQueryable<Conta> GetContas()
         {
             return db.Contas;
         }

@@ -11,6 +11,7 @@ namespace Smart.Dimdim.Api
     {
         protected void Application_Start()
         {
+            GlobalConfiguration.Configuration.IncludeErrorDetailPolicy = IncludeErrorDetailPolicy.Always;
             GlobalConfiguration.Configure(WebApiConfig.Register);
         }
     }
