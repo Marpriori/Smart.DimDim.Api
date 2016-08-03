@@ -9,10 +9,8 @@ namespace Smart.Dimdim.Api.Models
 {
     
     [Table("USUARIO")]
-    public class Usuario
+    public class Usuario:Entidade
     {
-        [Key]
-        public int Id { get; set; }
         public string Nome { get; set; }
         
         public string Email { get; set; }
