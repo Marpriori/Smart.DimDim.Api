@@ -1,24 +1,145 @@
 ﻿using Smart.Dimdim.Api.Database;
 using Smart.Dimdim.Api.Models;
+using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
+using System.Net;
 using System.Web.Http;
+using System.Web.Http.ModelBinding;
 using System.Web.Http.OData;
 
 namespace Smart.Dimdim.Api.Controllers
 {
-    public class UsuariosController : EntitySetController<Usuario,int>
+  
+    public class UsuariosController : ODataController
     {
-        SmartDimdimContext ctx = new SmartDimdimContext();
+        private SmartDimdimContext db = new SmartDimdimContext();
 
-        [Queryable(PageSize = 10)]
-        public override IQueryable<Usuario> Get()
+        // GET odata/Usuarios
+        [Queryable]
+        public IQueryable<Usuario> GetUsuarios()
         {
-            return ctx.Usuarios.AsQueryable();
+            return db.Usuarios;
         }
 
-        protected override Usuario GetEntityByKey(int key)
+        // GET odata/Usuarios(5)
+        [Queryable]
+        public SingleResult<Usuario> GetUsuario([FromODataUri] int key)
         {
-            return ctx.Usuarios.Find(key);
+            return SingleResult.Create(db.Usuarios.Where(usuario => usuario.Id == key));
+        }
+
+        // PUT odata/Usuarios(5)
+        public IHttpActionResult Put([FromODataUri] int key, Usuario usuario)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            if (key != usuario.Id)
+            {
+                return BadRequest();
+            }
+
+            db.Entry(usuario).State = EntityState.Modified;
+
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!UsuarioExists(key))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return Updated(usuario);
+        }
+
+        // POST odata/Usuarios
+        public IHttpActionResult Post(Usuario usuario)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            db.Usuarios.Add(usuario);
+            db.SaveChanges();
+
+            return Created(usuario);
+        }
+
+        // PATCH odata/Usuarios(5)
+        [AcceptVerbs("PATCH", "MERGE")]
+        public IHttpActionResult Patch([FromODataUri] int key, Delta<Usuario> patch)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            Usuario usuario = db.Usuarios.Find(key);
+            if (usuario == null)
+            {
+                return NotFound();
+            }
+
+            patch.Patch(usuario);
+
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!UsuarioExists(key))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return Updated(usuario);
+        }
+
+        // DELETE odata/Usuarios(5)
+        public IHttpActionResult Delete([FromODataUri] int key)
+        {
+            Usuario usuario = db.Usuarios.Find(key);
+            if (usuario == null)
+            {
+                return NotFound();
+            }
+
+            db.Usuarios.Remove(usuario);
+            db.SaveChanges();
+
+            return StatusCode(HttpStatusCode.NoContent);
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        private bool UsuarioExists(int key)
+        {
+            return db.Usuarios.Count(e => e.Id == key) > 0;
         }
     }
 }

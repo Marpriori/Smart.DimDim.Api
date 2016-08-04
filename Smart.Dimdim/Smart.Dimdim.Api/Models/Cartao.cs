@@ -7,7 +7,7 @@ using System.Web;
 namespace Smart.Dimdim.Api.Models
 {
     [Table("CARTAO")]
-    public class CARTAO : Entidade
+    public class Cartao: Entidade
     {
         public int UsuarioId { get;set;}
         public Usuario Usuario { get; set; }
