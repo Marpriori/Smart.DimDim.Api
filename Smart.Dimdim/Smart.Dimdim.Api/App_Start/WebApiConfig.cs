@@ -12,14 +12,19 @@ namespace Smart.Dimdim.Api
     {
         public static void Register(HttpConfiguration config)
         {
-            config.Routes.MapODataRoute("elearningOData", "OData", GenerateEdmModel());
+            config.Routes.MapODataRoute("SmartDimDimOData", "OData", GenerateEdmModel());
         }
 
         private static IEdmModel GenerateEdmModel()
         {
             var builder = new ODataConventionModelBuilder();
-            builder.EntitySet<Usuario>("Usuarios");
+            builder.EntitySet<Cartao>("Cartoes");
+            builder.EntitySet<Categoria>("Categorias");
             builder.EntitySet<Conta>("Contas");
+            builder.EntitySet<ContaMovimento>("ContaMovimentos");
+            builder.EntitySet<ContaTipo>("ContaTipos");
+            builder.EntitySet<Tag>("Tags");
+            builder.EntitySet<Usuario>("Usuarios");
             
             return builder.GetEdmModel();
         }

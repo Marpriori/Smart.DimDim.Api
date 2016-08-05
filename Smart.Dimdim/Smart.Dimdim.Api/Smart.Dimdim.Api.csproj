@@ -119,7 +119,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\CartoesController.cs" />
+    <Compile Include="Controllers\CategoriasController.cs" />
+    <Compile Include="Controllers\ContaMovimentosController.cs" />
     <Compile Include="Controllers\ContasController.cs" />
+    <Compile Include="Controllers\ContaTiposController.cs" />
+    <Compile Include="Controllers\TagsController.cs" />
     <Compile Include="Controllers\UsuariosController.cs" />
     <Compile Include="Database\SmartDimdimContext.cs" />
     <Compile Include="Global.asax.cs">
@@ -128,6 +133,8 @@
     <Compile Include="Models\Cartao.cs" />
     <Compile Include="Models\Categoria.cs" />
     <Compile Include="Models\Conta.cs" />
+    <Compile Include="Models\ContaMovimento.cs" />
+    <Compile Include="Models\ContaTipo.cs" />
     <Compile Include="Models\Entidade.cs" />
     <Compile Include="Models\Tag.cs" />
     <Compile Include="Models\Usuario.cs" />

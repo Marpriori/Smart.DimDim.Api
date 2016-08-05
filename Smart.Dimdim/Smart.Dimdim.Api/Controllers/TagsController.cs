@@ -10,39 +10,48 @@ using System.Web.Http.OData;
 
 namespace Smart.Dimdim.Api.Controllers
 {
+    /*
+    To add a route for this controller, merge these statements into the Register method of the WebApiConfig class. Note that OData URLs are case sensitive.
 
-    public class ContasController : ODataController
+    using System.Web.Http.OData.Builder;
+    using Smart.Dimdim.Api.Models;
+    ODataConventionModelBuilder builder = new ODataConventionModelBuilder();
+    builder.EntitySet<Tag>("Tags");
+    builder.EntitySet<Usuario>("Usuarios"); 
+    config.Routes.MapODataRoute("odata", "odata", builder.GetEdmModel());
+    */
+    public class TagsController : ODataController
     {
         private SmartDimdimContext db = new SmartDimdimContext();
 
-        // GET odata/contas
+        // GET odata/Tags
         [Queryable]
-        public IQueryable<Conta> GetContas()
+        public IQueryable<Tag> GetTags()
         {
-            return db.Contas;
+            return db.Tags;
         }
 
-        // GET odata/contas(5)
+        // GET odata/Tags(5)
         [Queryable]
-        public SingleResult<Conta> GetConta([FromODataUri] int key)
+        public SingleResult<Tag> GetTag([FromODataUri] int key)
         {
-            return SingleResult.Create(db.Contas.Where(conta => conta.Id == key));
+            return SingleResult.Create(db.Tags.Where(tag => tag.Id == key));
         }
 
-        // PUT odata/contas(5)
-        public IHttpActionResult Put([FromODataUri] int key, Conta conta)
+        // PUT odata/Tags(5)
+        public IHttpActionResult Put([FromODataUri] int key, Tag tag)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (key != conta.Id)
+            if (key != tag.Id)
             {
                 return BadRequest();
             }
 
-            db.Entry(conta).State = EntityState.Modified;
+            db.Entry(tag).State = EntityState.Modified;
 
             try
             {
@@ -50,7 +59,7 @@ namespace Smart.Dimdim.Api.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!ContaExists(key))
+                if (!TagExists(key))
                 {
                     return NotFound();
                 }
@@ -60,39 +69,39 @@ namespace Smart.Dimdim.Api.Controllers
                 }
             }
 
-            return Updated(conta);
+            return Updated(tag);
         }
 
-        // POST odata/contas
-        public IHttpActionResult Post(Conta conta)
+        // POST odata/Tags
+        public IHttpActionResult Post(Tag tag)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            db.Contas.Add(conta);
+            db.Tags.Add(tag);
             db.SaveChanges();
 
-            return Created(conta);
+            return Created(tag);
         }
 
-        // PATCH odata/contas(5)
+        // PATCH odata/Tags(5)
         [AcceptVerbs("PATCH", "MERGE")]
-        public IHttpActionResult Patch([FromODataUri] int key, Delta<Conta> patch)
+        public IHttpActionResult Patch([FromODataUri] int key, Delta<Tag> patch)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            Conta conta = db.Contas.Find(key);
-            if (conta == null)
+            Tag tag = db.Tags.Find(key);
+            if (tag == null)
             {
                 return NotFound();
             }
 
-            patch.Patch(conta);
+            patch.Patch(tag);
 
             try
             {
@@ -100,7 +109,7 @@ namespace Smart.Dimdim.Api.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!ContaExists(key))
+                if (!TagExists(key))
                 {
                     return NotFound();
                 }
@@ -110,22 +119,29 @@ namespace Smart.Dimdim.Api.Controllers
                 }
             }
 
-            return Updated(conta);
+            return Updated(tag);
         }
 
-        // DELETE odata/contas(5)
+        // DELETE odata/Tags(5)
         public IHttpActionResult Delete([FromODataUri] int key)
         {
-            Conta conta = db.Contas.Find(key);
-            if (conta == null)
+            Tag tag = db.Tags.Find(key);
+            if (tag == null)
             {
                 return NotFound();
             }
 
-            db.Contas.Remove(conta);
+            db.Tags.Remove(tag);
             db.SaveChanges();
 
             return StatusCode(HttpStatusCode.NoContent);
+        }
+
+        // GET odata/Tags(5)/Usuario
+        [Queryable]
+        public SingleResult<Usuario> GetUsuario([FromODataUri] int key)
+        {
+            return SingleResult.Create(db.Tags.Where(m => m.Id == key).Select(m => m.Usuario));
         }
 
         protected override void Dispose(bool disposing)
@@ -137,9 +153,9 @@ namespace Smart.Dimdim.Api.Controllers
             base.Dispose(disposing);
         }
 
-        private bool ContaExists(int key)
+        private bool TagExists(int key)
         {
-            return db.Contas.Count(e => e.Id == key) > 0;
+            return db.Tags.Count(e => e.Id == key) > 0;
         }
     }
 }
