@@ -19,6 +19,8 @@ namespace Smart.Dimdim.Api
         {
             var builder = new ODataConventionModelBuilder();
             builder.EntitySet<Cartao>("Cartoes");
+            builder.EntitySet<CartaoFatura>("CartaoFaturas");
+            builder.EntitySet<CartaoMovimento>("CartaoMovimentos");
             builder.EntitySet<Categoria>("Categorias");
             builder.EntitySet<Conta>("Contas");
             builder.EntitySet<ContaMovimento>("ContaMovimentos");
