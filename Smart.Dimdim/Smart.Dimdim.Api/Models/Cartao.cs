@@ -17,5 +17,7 @@ namespace Smart.Dimdim.Api.Models
         public int DiaPagamento { get; set; }
         public int ContaId { get; set; }
         public Conta Conta { get; set; }
+        public int BandeiraId { get; set; }
+        public CartaoBandeira Bandeira { get; set; }
     }
 }

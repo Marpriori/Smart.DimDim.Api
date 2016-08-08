@@ -119,6 +119,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\CartaoBandeirasController.cs" />
+    <Compile Include="Controllers\CartaoFaturasController.cs" />
+    <Compile Include="Controllers\CartaoMovimentosController.cs" />
     <Compile Include="Controllers\CartoesController.cs" />
     <Compile Include="Controllers\CategoriasController.cs" />
     <Compile Include="Controllers\ContaMovimentosController.cs" />
@@ -131,6 +134,9 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Cartao.cs" />
+    <Compile Include="Models\CartaoBandeira.cs" />
+    <Compile Include="Models\CartaoFatura.cs" />
+    <Compile Include="Models\CartaoMovimento.cs" />
     <Compile Include="Models\Categoria.cs" />
     <Compile Include="Models\Conta.cs" />
     <Compile Include="Models\ContaMovimento.cs" />

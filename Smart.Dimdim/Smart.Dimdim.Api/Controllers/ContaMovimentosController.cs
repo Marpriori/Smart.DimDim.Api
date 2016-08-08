@@ -10,18 +10,7 @@ using System.Web.Http.OData;
 
 namespace Smart.Dimdim.Api.Controllers
 {
-    /*
-    To add a route for this controller, merge these statements into the Register method of the WebApiConfig class. Note that OData URLs are case sensitive.
-
-    using System.Web.Http.OData.Builder;
-    using Smart.Dimdim.Api.Models;
-    ODataConventionModelBuilder builder = new ODataConventionModelBuilder();
-    builder.EntitySet<ContaMovimento>("ContaMovimentos");
-    builder.EntitySet<Categoria>("Categorias"); 
-    builder.EntitySet<Conta>("Contas"); 
-    builder.EntitySet<Usuario>("Usuarios"); 
-    config.Routes.MapODataRoute("odata", "odata", builder.GetEdmModel());
-    */
+  
     public class ContaMovimentosController : ODataController
     {
         private SmartDimdimContext db = new SmartDimdimContext();

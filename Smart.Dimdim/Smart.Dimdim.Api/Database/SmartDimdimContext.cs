@@ -25,5 +25,11 @@ namespace Smart.Dimdim.Api.Database
         public System.Data.Entity.DbSet<Smart.Dimdim.Api.Models.ContaTipo> ContaTipoes { get; set; }
 
         public System.Data.Entity.DbSet<Smart.Dimdim.Api.Models.Tag> Tags { get; set; }
+
+        public System.Data.Entity.DbSet<Smart.Dimdim.Api.Models.CartaoBandeira> CartaoBandeiras { get; set; }
+
+        public System.Data.Entity.DbSet<Smart.Dimdim.Api.Models.CartaoFatura> CartaoFaturas { get; set; }
+
+        public System.Data.Entity.DbSet<Smart.Dimdim.Api.Models.CartaoMovimento> CartaoMovimentoes { get; set; }
     }
 }
