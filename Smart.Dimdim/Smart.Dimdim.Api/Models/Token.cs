@@ -48,10 +48,12 @@ namespace Smart.Dimdim.Api.Models
             if (string.IsNullOrWhiteSpace(email) || string.IsNullOrWhiteSpace(senha))
                 throw new HttpApiException(HttpStatusCode.Unauthorized, "E-mail e senha obrigatórios.");
 
+            
+
             var db = new SmartDimdimContext();
             Usuario = db.Usuarios.FirstOrDefault(
                 u => u.Email == email &&
-                     u.Senha == Usuario.Crypto(senha));
+                     u.Senha == senha);
 
             if (Usuario == null)
                 throw new HttpApiException(HttpStatusCode.Unauthorized, "Usuário não encontrado.");

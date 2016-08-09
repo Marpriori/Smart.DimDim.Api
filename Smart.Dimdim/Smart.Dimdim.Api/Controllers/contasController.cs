@@ -5,12 +5,12 @@ using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
 using System.Web.Http;
-using System.Web.Http.ModelBinding;
 using System.Web.Http.OData;
+using Smart.Dimdim.Api.App_Start;
 
 namespace Smart.Dimdim.Api.Controllers
 {
-
+    [BasicAuthApiFilter]
     public class ContasController : ODataController
     {
         private SmartDimdimContext db = new SmartDimdimContext();

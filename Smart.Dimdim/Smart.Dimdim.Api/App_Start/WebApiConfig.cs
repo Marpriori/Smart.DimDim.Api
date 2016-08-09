@@ -12,6 +12,13 @@ namespace Smart.Dimdim.Api
     {
         public static void Register(HttpConfiguration config)
         {
+            config.MapHttpAttributeRoutes();
+
+            config.Routes.MapHttpRoute(
+                name: "DefaultApi",
+                routeTemplate: "api/{controller}/{id}",
+                defaults: new { id = RouteParameter.Optional }
+            );
             config.Routes.MapODataRoute("SmartDimDimOData", "OData", GenerateEdmModel());
         }
 
@@ -28,9 +35,6 @@ namespace Smart.Dimdim.Api
             builder.EntitySet<ContaTipo>("ContaTipos");
             builder.EntitySet<Tag>("Tags");
             builder.EntitySet<Usuario>("Usuarios");
-
-            builder.EntitySet<Token>("Token");
-            builder.EntityType<Token>().
             
             return builder.GetEdmModel();
         }

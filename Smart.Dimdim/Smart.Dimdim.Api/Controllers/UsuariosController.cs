@@ -5,8 +5,8 @@ using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
 using System.Web.Http;
-using System.Web.Http.ModelBinding;
 using System.Web.Http.OData;
+using Smart.Dimdim.Api.Controllers.Base;
 
 namespace Smart.Dimdim.Api.Controllers
 {
