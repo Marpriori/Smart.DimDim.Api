@@ -120,6 +120,7 @@
   <ItemGroup>
     <Compile Include="App_Start\ApiIdentity.cs" />
     <Compile Include="App_Start\BasicAuthApiFilterAttribute.cs" />
+    <Compile Include="App_Start\HttpApiException.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\Base\ODataBaseController.cs" />
     <Compile Include="Controllers\CartaoBandeirasController.cs" />

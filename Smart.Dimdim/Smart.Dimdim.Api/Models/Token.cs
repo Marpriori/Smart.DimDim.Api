@@ -1,8 +1,11 @@
 ﻿using Smart.Dimdim.Api.Database;
 using System;
+using System.Linq;
 using System.Net;
+using System.Security.Principal;
 using System.Text;
 using System.Web;
+using Smart.Dimdim.Api.App_Start;
 
 namespace Smart.Dimdim.Api.Models
 {
@@ -40,10 +43,10 @@ namespace Smart.Dimdim.Api.Models
                 string.Format("{0}:{1}", usuario.Email, usuario.Senha)));
         }
 
-        public Token Login(string email, string senha)
+        public void Login(string email, string senha)
         {
-            if (string.IsNullOrWhiteSpace(usuario) || string.IsNullOrWhiteSpace(senha))
-                throw new HttpException(HttpStatusCode.Unauthorized, "E-mail e senha obrigatórios.");
+            if (string.IsNullOrWhiteSpace(email) || string.IsNullOrWhiteSpace(senha))
+                throw new HttpApiException(HttpStatusCode.Unauthorized, "E-mail e senha obrigatórios.");
 
             var db = new SmartDimdimContext();
             Usuario = db.Usuarios.FirstOrDefault(
@@ -51,14 +54,12 @@ namespace Smart.Dimdim.Api.Models
                      u.Senha == Usuario.Crypto(senha));
 
             if (Usuario == null)
-                throw new HttpException(HttpStatusCode.Unauthorized, "Usuário não encontrado.");
+                throw new HttpApiException(HttpStatusCode.Unauthorized, "Usuário não encontrado.");
 
             HttpContext.Current.User = new GenericPrincipal(new ApiIdentity(Usuario), new string[] { });
 
-            Bind(usuario);
+            Bind(Usuario);
 
-
-            this;
         }
     }
 }

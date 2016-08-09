@@ -1,11 +1,7 @@
-﻿using Smart.Dimdim.Api.Database;
-using Smart.Dimdim.Api.Models;
+﻿using Smart.Dimdim.Api.Models;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Security.Principal;
 using System.Text;
 using System.Web;
 using System.Web.Http.Filters;
@@ -19,7 +15,7 @@ namespace Smart.Dimdim.Api.App_Start
             try
             {
                 if (actionContext.Request.Headers.Authorization == null)
-                    throw new HttpException(HttpStatusCode.Unauthorized, "Cabeçalho 'Authorization' não encontrado.");
+                    throw new HttpApiException(HttpStatusCode.Unauthorized, "Cabeçalho 'Authorization' não encontrado.");
 
                 string authToken = actionContext.Request.Headers.Authorization.Parameter;
                 string decodedToken = Encoding.UTF8.GetString(Convert.FromBase64String(authToken));
@@ -31,7 +27,7 @@ namespace Smart.Dimdim.Api.App_Start
                 new Token().Login(email, password);
                 base.OnActionExecuting(actionContext);
             }
-            catch (HttpException ex)
+            catch (HttpApiException ex)
             {
                 actionContext.Response = new HttpResponseMessage((HttpStatusCode)ex.WebEventCode);
             }

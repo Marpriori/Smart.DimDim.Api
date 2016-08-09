@@ -28,6 +28,9 @@ namespace Smart.Dimdim.Api
             builder.EntitySet<ContaTipo>("ContaTipos");
             builder.EntitySet<Tag>("Tags");
             builder.EntitySet<Usuario>("Usuarios");
+
+            builder.EntitySet<Token>("Token");
+            builder.EntityType<Token>().
             
             return builder.GetEdmModel();
         }

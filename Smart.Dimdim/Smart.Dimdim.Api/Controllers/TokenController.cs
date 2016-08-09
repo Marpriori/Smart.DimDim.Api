@@ -2,10 +2,12 @@
 using Smart.Dimdim.Api.Database;
 using Smart.Dimdim.Api.Models;
 using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
 using System.Text;
 using System.Web;
 using System.Web.Http;
@@ -22,17 +24,28 @@ namespace Smart.Dimdim.Api.Controllers
         [Queryable]
         public IQueryable<Token> GetToken()
         {
-            var usuario = ((ApiIdentity)HttpContext.Current.User.Identity).Usuario;
+            var tokenList = new List<Token>();
+            try
+            {
+                var usuario = ((ApiIdentity)HttpContext.Current.User.Identity).Usuario;
 
-            return new Token(usuario);
-           ;
+                tokenList.Add(new Token(usuario));
+            }
+            catch
+            {
+                throw new HttpResponseException(HttpStatusCode.NotFound);
+            }
+            return tokenList.AsQueryable();
+
         }
 
         // GET odata/Usuarios(5)
         [Queryable]
         public SingleResult<Token> Login([FromODataUri] string email, string senha)
         {
-            return new Token().Login(email, senha);
+            var token = new Token();
+            token.Login(email, senha);
+            return new SingleResult<Token>((new List<Token> { token }).AsQueryable());
         }
 
         // POST odata/Token
@@ -63,7 +76,7 @@ namespace Smart.Dimdim.Api.Controllers
             {
                 return NotFound();
             }
-           
+
             patch.Patch(usuario);
 
             try
