@@ -1,9 +1,13 @@
-﻿using Smart.Dimdim.Api.Database;
+﻿using Smart.Dimdim.Api.App_Start;
+using Smart.Dimdim.Api.Database;
 using Smart.Dimdim.Api.Models;
+using System;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
+using System.Text;
+using System.Web;
 using System.Web.Http;
 using System.Web.Http.ModelBinding;
 using System.Web.Http.OData;
@@ -11,58 +15,27 @@ using System.Web.Http.OData;
 namespace Smart.Dimdim.Api.Controllers
 {
 
-    public class UsuariosController : ODataBaseController
+    public class TokenController : ODataBaseController
     {
 
         // GET odata/Usuarios
         [Queryable]
-        public IQueryable<Usuario> GetUsuarios()
+        public IQueryable<Token> GetToken()
         {
-            return db.Usuarios;
+            var usuario = ((ApiIdentity)HttpContext.Current.User.Identity).Usuario;
+
+            return new Token(usuario);
+           ;
         }
 
         // GET odata/Usuarios(5)
         [Queryable]
-        public SingleResult<Usuario> GetUsuario([FromODataUri] int key)
+        public SingleResult<Token> Login([FromODataUri] string email, string senha)
         {
-            return SingleResult.Create(db.Usuarios.Where(usuario => usuario.Id == key));
+            return new Token().Login(email, senha);
         }
 
-        // PUT odata/Usuarios(5)
-        public IHttpActionResult Put([FromODataUri] int key, Usuario usuario)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            if (key != usuario.Id)
-            {
-                return BadRequest();
-            }
-            
-            db.Entry(usuario).State = EntityState.Modified;
-
-            try
-            {
-                db.SaveChanges();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!UsuarioExists(key))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return Updated(usuario);
-        }
-
-        // POST odata/Usuarios
+        // POST odata/Token
         public IHttpActionResult Post(Usuario usuario)
         {
             if (!ModelState.IsValid)

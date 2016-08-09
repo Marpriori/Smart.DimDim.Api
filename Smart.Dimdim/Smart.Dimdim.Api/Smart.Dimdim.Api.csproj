@@ -118,7 +118,10 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Start\ApiIdentity.cs" />
+    <Compile Include="App_Start\BasicAuthApiFilterAttribute.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\Base\ODataBaseController.cs" />
     <Compile Include="Controllers\CartaoBandeirasController.cs" />
     <Compile Include="Controllers\CartaoFaturasController.cs" />
     <Compile Include="Controllers\CartaoMovimentosController.cs" />
@@ -128,6 +131,7 @@
     <Compile Include="Controllers\ContasController.cs" />
     <Compile Include="Controllers\ContaTiposController.cs" />
     <Compile Include="Controllers\TagsController.cs" />
+    <Compile Include="Controllers\TokenController.cs" />
     <Compile Include="Controllers\UsuariosController.cs" />
     <Compile Include="Database\SmartDimdimContext.cs" />
     <Compile Include="Global.asax.cs">
@@ -143,6 +147,7 @@
     <Compile Include="Models\ContaTipo.cs" />
     <Compile Include="Models\Entidade.cs" />
     <Compile Include="Models\Tag.cs" />
+    <Compile Include="Models\Token.cs" />
     <Compile Include="Models\Usuario.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

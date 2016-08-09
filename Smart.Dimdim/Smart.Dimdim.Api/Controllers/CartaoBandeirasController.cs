@@ -1,32 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
+﻿using Smart.Dimdim.Api.App_Start;
+using Smart.Dimdim.Api.Models;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
-using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.ModelBinding;
 using System.Web.Http.OData;
-using System.Web.Http.OData.Routing;
-using Smart.Dimdim.Api.Database;
-using Smart.Dimdim.Api.Models;
 
 namespace Smart.Dimdim.Api.Controllers
 {
-    /*
-    The WebApiConfig class may require additional changes to add a route for this controller. Merge these statements into the Register method of the WebApiConfig class as applicable. Note that OData URLs are case sensitive.
-
-    using System.Web.Http.OData.Builder;
-    using Smart.Dimdim.Api.Models;
-    ODataConventionModelBuilder builder = new ODataConventionModelBuilder();
-    builder.EntitySet<CartaoBandeira>("CartaoBandeiras");
-    config.Routes.MapODataRoute("odata", "odata", builder.GetEdmModel());
-    */
-    public class CartaoBandeirasController : ODataController
+    [BasicAuthApiFilter]
+    public class CartaoBandeirasController : ODataBaseController
     {
-        private SmartDimdimContext db = new SmartDimdimContext();
+        
 
         // GET: odata/CartaoBandeiras
         [Queryable]
