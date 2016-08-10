@@ -13,12 +13,16 @@ namespace Smart.Dimdim.Api.Controllers
 {
     public class ContasController : ODataBaseController
     {
+        public ContasController()
+        {
+            CorrenteDbSet = db.Contas;
+        }
 
         // GET odata/contas
         [Queryable]
         public IQueryable<Conta> GetContas()
         {
-            return db.Contas.Where(conta => conta.UsuarioId == UsuarioLogado.Id);
+            return db.Contas.WhereUsuario(UsuarioLogado.Id);
         }
 
         // GET odata/contas(5)
@@ -26,10 +30,8 @@ namespace Smart.Dimdim.Api.Controllers
         public SingleResult<Conta> GetConta([FromODataUri] int key)
         {
             return SingleResult.Create(
-                db.Contas.Where(
-                conta =>
-                    conta.UsuarioId == UsuarioLogado.Id &&
-                    conta.Id == key));
+                db.Contas.WhereUsuario(UsuarioLogado.Id)
+                         .Where(conta => conta.Id == key));
         }
 
         // PUT odata/contas(5)
@@ -133,7 +135,7 @@ namespace Smart.Dimdim.Api.Controllers
 
         private bool ContaExists(int key)
         {
-            return db.Contas.Any(e => e.Id == key);
+            return db.Contas.WhereUsuario(UsuarioLogado.Id).Any(e => e.Id == key);
         }
 
 

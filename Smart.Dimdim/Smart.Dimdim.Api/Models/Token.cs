@@ -6,6 +6,7 @@ using System.Security.Principal;
 using System.Text;
 using System.Web;
 using Smart.Dimdim.Api.App_Start;
+using Smart.Dimdim.Api.Models.Base;
 
 namespace Smart.Dimdim.Api.Models
 {

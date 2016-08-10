@@ -1,17 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
+﻿
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Web;
+
+using Smart.Dimdim.Api.Models.Interface;
+using Smart.Dimdim.Api.Models.Base;
 
 namespace Smart.Dimdim.Api.Models
 {
 
     [Table("CONTA")]
-    public class Conta: Entidade
+    public class Conta : EntidadeUsuario
     {
-        public int UsuarioId { get; set; }
-        public Usuario Usuario { get; set; }
 
         public string Titulo { get; set; }
         public decimal SaldoAtual { get; set; }

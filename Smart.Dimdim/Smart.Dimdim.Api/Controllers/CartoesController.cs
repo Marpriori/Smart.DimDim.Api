@@ -1,4 +1,5 @@
-﻿using Smart.Dimdim.Api.Database;
+﻿using Smart.Dimdim.Api.Controllers.Base;
+using Smart.Dimdim.Api.Database;
 using Smart.Dimdim.Api.Models;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
@@ -11,22 +12,23 @@ using System.Web.Http.OData;
 namespace Smart.Dimdim.Api.Controllers
 {
 
-    public class CartoesController : ODataController
+    public class CartoesController : ODataBaseController
     {
-        private SmartDimdimContext db = new SmartDimdimContext();
 
         // GET odata/Cartoes
         [Queryable]
         public IQueryable<Cartao> GetCartoes()
         {
-            return db.Cartaos;
+            return db.Cartaos.WhereUsuario(UsuarioLogado.Id);
         }
 
         // GET odata/Cartoes(5)
         [Queryable]
         public SingleResult<Cartao> GetCartao([FromODataUri] int key)
         {
-            return SingleResult.Create(db.Cartaos.Where(cartao => cartao.Id == key));
+            return SingleResult.Create(
+                db.Cartaos.WhereUsuario(UsuarioLogado.Id)
+                          .Where(cartao => cartao.Id == key));
         }
 
         // PUT odata/Cartoes(5)
@@ -41,7 +43,7 @@ namespace Smart.Dimdim.Api.Controllers
             {
                 return BadRequest();
             }
-
+            cartao.UsuarioId = UsuarioLogado.Id;
             db.Entry(cartao).State = EntityState.Modified;
 
             try
@@ -70,7 +72,7 @@ namespace Smart.Dimdim.Api.Controllers
             {
                 return BadRequest(ModelState);
             }
-
+            cartao.UsuarioId = UsuarioLogado.Id;
             db.Cartaos.Add(cartao);
             db.SaveChanges();
 
@@ -142,18 +144,9 @@ namespace Smart.Dimdim.Api.Controllers
             return SingleResult.Create(db.Cartaos.Where(m => m.Id == key).Select(m => m.Usuario));
         }
 
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
-
         private bool CartaoExists(int key)
         {
-            return db.Cartaos.Count(e => e.Id == key) > 0;
+            return db.Cartaos.WhereUsuario(UsuarioLogado.Id).Any(e => e.Id == key);
         }
     }
 }

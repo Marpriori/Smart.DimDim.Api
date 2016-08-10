@@ -2,13 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using Smart.Dimdim.Api.Models.Base;
 
 namespace Smart.Dimdim.Api.Models
 {
-    public class Categoria:Entidade
+    public class Categoria:EntidadeUsuario
     {
-        public int UsuarioId { get; set; }
-        public Usuario Usuario { get; set; }
         
         public char Transacao { get; set; }
         public string Descricao { get; set; }

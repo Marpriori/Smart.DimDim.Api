@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Smart.Dimdim.Api.Models
+namespace Smart.Dimdim.Api.Models.Base
 {
     public abstract class Entidade
     {

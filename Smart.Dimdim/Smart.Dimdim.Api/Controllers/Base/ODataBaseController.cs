@@ -1,9 +1,12 @@
 ﻿using Smart.Dimdim.Api.App_Start;
 using Smart.Dimdim.Api.Database;
 using Smart.Dimdim.Api.Models;
+using System.Data.Entity;
+using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Http.OData;
+using Smart.Dimdim.Api.Models.Base;
 
 namespace Smart.Dimdim.Api.Controllers.Base
 {
@@ -30,6 +33,13 @@ namespace Smart.Dimdim.Api.Controllers.Base
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        protected DbSet CorrenteDbSet;
+
+        protected IQueryable<T> GetAll<T>()t:EntidadeUsuario
+        {
+            return CorrenteDbSet.WhereUsuario
         }
     }
 }

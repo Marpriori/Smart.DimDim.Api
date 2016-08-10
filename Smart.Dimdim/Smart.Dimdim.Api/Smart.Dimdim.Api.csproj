@@ -137,10 +137,12 @@
     <Compile Include="Controllers\TagsController.cs" />
     <Compile Include="Controllers\TokenController.cs" />
     <Compile Include="Controllers\UsuariosController.cs" />
+    <Compile Include="Database\DbSetExtensions.cs" />
     <Compile Include="Database\SmartDimdimContext.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Base\EntidadeUsuario.cs" />
     <Compile Include="Models\Cartao.cs" />
     <Compile Include="Models\CartaoBandeira.cs" />
     <Compile Include="Models\CartaoFatura.cs" />
@@ -149,7 +151,8 @@
     <Compile Include="Models\Conta.cs" />
     <Compile Include="Models\ContaMovimento.cs" />
     <Compile Include="Models\ContaTipo.cs" />
-    <Compile Include="Models\Entidade.cs" />
+    <Compile Include="Models\Base\Entidade.cs" />
+    <Compile Include="Models\Interface\IPorUsuarioModel.cs" />
     <Compile Include="Models\Tag.cs" />
     <Compile Include="Models\Token.cs" />
     <Compile Include="Models\Usuario.cs" />

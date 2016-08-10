@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Smart.Dimdim.Api.Models.Base;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -12,13 +13,11 @@ namespace Smart.Dimdim.Api.Models
     }
 
     [Table("CONTA_MOVIMENTO")]
-    public class ContaMovimento:Entidade
+    public class ContaMovimento:EntidadeUsuario
     {
         public int OwnerId {get;set;}
         public ContaMovimento Owner { get; set; }
 
-        public int UsuarioId { get; set; }
-        public Usuario Usuario { get; set; }
         public int ContaId { get; set; }
         public Conta Conta { get; set; }
         public int CategoriaId { get; set; }

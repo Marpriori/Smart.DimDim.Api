@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations.Schema;
+using Smart.Dimdim.Api.Models.Base;
 
 namespace Smart.Dimdim.Api.Models
 {
