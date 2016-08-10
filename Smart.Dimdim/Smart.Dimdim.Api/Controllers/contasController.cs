@@ -7,26 +7,29 @@ using System.Net;
 using System.Web.Http;
 using System.Web.Http.OData;
 using Smart.Dimdim.Api.App_Start;
+using Smart.Dimdim.Api.Controllers.Base;
 
 namespace Smart.Dimdim.Api.Controllers
 {
-    [BasicAuthApiFilter]
-    public class ContasController : ODataController
+    public class ContasController : ODataBaseController
     {
-        private SmartDimdimContext db = new SmartDimdimContext();
 
         // GET odata/contas
         [Queryable]
         public IQueryable<Conta> GetContas()
         {
-            return db.Contas;
+            return db.Contas.Where(conta => conta.UsuarioId == UsuarioLogado.Id);
         }
 
         // GET odata/contas(5)
         [Queryable]
         public SingleResult<Conta> GetConta([FromODataUri] int key)
         {
-            return SingleResult.Create(db.Contas.Where(conta => conta.Id == key));
+            return SingleResult.Create(
+                db.Contas.Where(
+                conta =>
+                    conta.UsuarioId == UsuarioLogado.Id &&
+                    conta.Id == key));
         }
 
         // PUT odata/contas(5)
@@ -41,7 +44,7 @@ namespace Smart.Dimdim.Api.Controllers
             {
                 return BadRequest();
             }
-
+            conta.UsuarioId = UsuarioLogado.Id;
             db.Entry(conta).State = EntityState.Modified;
 
             try
@@ -70,7 +73,7 @@ namespace Smart.Dimdim.Api.Controllers
             {
                 return BadRequest(ModelState);
             }
-
+            conta.UsuarioId = UsuarioLogado.Id;
             db.Contas.Add(conta);
             db.SaveChanges();
 
@@ -117,7 +120,7 @@ namespace Smart.Dimdim.Api.Controllers
         public IHttpActionResult Delete([FromODataUri] int key)
         {
             Conta conta = db.Contas.Find(key);
-            if (conta == null)
+            if (conta == null || conta.UsuarioId != UsuarioLogado.Id)
             {
                 return NotFound();
             }
@@ -128,18 +131,11 @@ namespace Smart.Dimdim.Api.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
-
         private bool ContaExists(int key)
         {
-            return db.Contas.Count(e => e.Id == key) > 0;
+            return db.Contas.Any(e => e.Id == key);
         }
+
+
     }
 }

@@ -4,8 +4,8 @@ using Smart.Dimdim.Api.Models;
 using System;
 using System.Net;
 using System.Net.Http;
-
 using System.Text;
+using System.Web.Http.Controllers;
 using System.Web.Http.Filters;
 using System.Web.Http.OData.Extensions;
 
@@ -13,7 +13,8 @@ namespace Smart.Dimdim.Api.App_Start
 {
     public class BasicAuthApiFilterAttribute : ActionFilterAttribute
     {
-        public override void OnActionExecuting(System.Web.Http.Controllers.HttpActionContext actionContext)
+
+        public override void OnActionExecuting(HttpActionContext actionContext)
         {
             try
             {
@@ -32,15 +33,25 @@ namespace Smart.Dimdim.Api.App_Start
             }
             catch (HttpApiException ex)
             {
-                var odata = new ODataError
-                    {
-                        Message = ex.Message,
-                        InnerError = new ODataInnerError(ex)
-                    };
-                actionContext.Response =
-                    actionContext.Request.CreateErrorResponse(ex.StatusCode, odata);
+                actionContext.Response = GerarMensagemRetorno(actionContext.Request, ex.StatusCode, ex);
+            }
+            catch (Exception ex)
+            {
+                actionContext.Response = GerarMensagemRetorno(actionContext.Request, HttpStatusCode.Unauthorized, ex);
+
             }
 
         }
+        public static HttpResponseMessage GerarMensagemRetorno(HttpRequestMessage actionContextRequest, HttpStatusCode statusCode, Exception exception)
+        {
+            var odata = new ODataError
+            {
+                Message = exception.Message,
+                InnerError = new ODataInnerError(exception)
+            };
+            return
+                actionContextRequest.CreateErrorResponse(statusCode, odata);
+        }
+        
     }
 }

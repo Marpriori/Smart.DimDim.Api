@@ -23,17 +23,17 @@ namespace Smart.Dimdim.Api.Models
         }
         public Token(Usuario usuario)
         {
-
-            Bind(usuario);
+            Usuario = usuario;
+            Bind();
 
         }
 
-        private void Bind(Usuario usuario)
+        private void Bind()
         {
             Id = 1;
-            Nome = usuario.Nome;
+            Nome = Usuario.Nome;
             Validade = DateTime.Now;
-            Valor = GenerateToken(usuario);
+            Valor = GenerateToken(Usuario);
         }
 
         public string GenerateToken(Usuario usuario)
@@ -60,7 +60,7 @@ namespace Smart.Dimdim.Api.Models
 
             HttpContext.Current.User = new GenericPrincipal(new ApiIdentity(Usuario), new string[] { });
 
-            Bind(Usuario);
+            Bind();
 
         }
     }

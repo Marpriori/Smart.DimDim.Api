@@ -8,13 +8,16 @@ using System.Web.Http;
 
 namespace Smart.Dimdim.Api.Controllers
 {
+    /// <summary>
+    /// api/Token
+    /// </summary>
     public class TokenController : ApiBaseController
     {
-        // GET: api/Token
+        [BasicAuthApiFilter]
         public IEnumerable<Token> Get()
         {
             var identidade = HttpContext.Current.User.Identity as ApiIdentity;
-            if (identidade == null) throw new HttpResponseException(HttpStatusCode.Unauthorized);
+            if (identidade == null) throw new HttpApiException(HttpStatusCode.Unauthorized, "Usuário não identificado. Fazer login.");
 
             var usuario = identidade.Usuario;
 
@@ -30,16 +33,6 @@ namespace Smart.Dimdim.Api.Controllers
             token.Login(login.Email,login.Senha);
 
             return Ok(token);
-        }
-
-        // PUT: api/Token/5
-        public void Put(int id, [FromBody]string value)
-        {
-        }
-
-        // DELETE: api/Token/5
-        public void Delete(int id)
-        {
         }
     }
 
