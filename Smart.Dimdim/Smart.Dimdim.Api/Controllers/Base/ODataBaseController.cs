@@ -37,9 +37,6 @@ namespace Smart.Dimdim.Api.Controllers.Base
 
         protected DbSet CorrenteDbSet;
 
-        protected IQueryable<T> GetAll<T>()t:EntidadeUsuario
-        {
-            return CorrenteDbSet.WhereUsuario
-        }
+        
     }
 }
