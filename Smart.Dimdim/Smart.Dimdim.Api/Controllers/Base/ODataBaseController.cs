@@ -11,7 +11,7 @@ using Smart.Dimdim.Api.Models.Base;
 namespace Smart.Dimdim.Api.Controllers.Base
 {
     [HttpExceptionFilter]
-    [BasicAuthApiFilter]
+    //[BasicAuthApiFilter]
     public class ODataBaseController: ODataController
     {
         protected SmartDimdimContext db = new SmartDimdimContext();
