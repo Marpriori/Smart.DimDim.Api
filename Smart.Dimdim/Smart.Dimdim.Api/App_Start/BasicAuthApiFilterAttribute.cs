@@ -1,6 +1,7 @@
 ﻿using Microsoft.Data.OData;
 using Newtonsoft.Json;
-using Smart.Dimdim.Api.Models;
+using Smart.Dimdim.Api.Controllers;
+using Smart.Dimdim.Models;
 using System;
 using System.Net;
 using System.Net.Http;
@@ -27,8 +28,8 @@ namespace Smart.Dimdim.Api.App_Start
                 string email = decodedToken.Substring(0, decodedToken.IndexOf(":"));
                 string password = decodedToken.Substring(decodedToken.IndexOf(":") + 1);
 
-
-                new Token().Login(email, password);
+                var controller = new TokenController();
+                controller.Login(email, password);
                 base.OnActionExecuting(actionContext);
             }
             catch (HttpApiException ex)

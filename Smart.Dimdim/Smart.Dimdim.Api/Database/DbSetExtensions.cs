@@ -1,4 +1,4 @@
-﻿using Smart.Dimdim.Api.Models.Base;
+﻿using Smart.Dimdim.Models.Base;
 using System.Data.Entity;
 using System.Linq;
 

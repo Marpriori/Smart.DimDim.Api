@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using Smart.Dimdim.Api.Models.Base;
+using Smart.Dimdim.Models.Base;
 
-namespace Smart.Dimdim.Api.Models
+namespace Smart.Dimdim.Models
 {
     public class Categoria:EntidadeUsuario
     {

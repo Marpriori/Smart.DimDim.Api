@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Security.Principal;
-using Smart.Dimdim.Api.Models;
+using Smart.Dimdim.Models;
 
 namespace Smart.Dimdim.Api.App_Start
 {

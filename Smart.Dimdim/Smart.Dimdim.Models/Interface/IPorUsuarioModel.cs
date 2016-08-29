@@ -1,5 +1,5 @@
 ﻿
-namespace Smart.Dimdim.Api.Models.Interface
+namespace Smart.Dimdim.Models.Interface
 {
     interface IPorUsuarioModel
     {

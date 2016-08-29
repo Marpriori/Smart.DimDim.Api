@@ -1,12 +1,12 @@
 ﻿using Smart.Dimdim.Api.App_Start;
 using Smart.Dimdim.Api.Database;
-using Smart.Dimdim.Api.Models;
+using Smart.Dimdim.Models;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Http.OData;
-using Smart.Dimdim.Api.Models.Base;
+using Smart.Dimdim.Models.Base;
 
 namespace Smart.Dimdim.Api.Controllers.Base
 {

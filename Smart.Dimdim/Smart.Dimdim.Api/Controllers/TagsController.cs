@@ -1,5 +1,5 @@
 ﻿using Smart.Dimdim.Api.Database;
-using Smart.Dimdim.Api.Models;
+using Smart.Dimdim.Models;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
@@ -14,7 +14,7 @@ namespace Smart.Dimdim.Api.Controllers
     To add a route for this controller, merge these statements into the Register method of the WebApiConfig class. Note that OData URLs are case sensitive.
 
     using System.Web.Http.OData.Builder;
-    using Smart.Dimdim.Api.Models;
+    using Smart.Dimdim.Models;
     ODataConventionModelBuilder builder = new ODataConventionModelBuilder();
     builder.EntitySet<Tag>("Tags");
     builder.EntitySet<Usuario>("Usuarios"); 

@@ -1,5 +1,5 @@
 ﻿using Smart.Dimdim.Api.Database;
-using Smart.Dimdim.Api.Models;
+using Smart.Dimdim.Models;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web.Http;
 using System.Web.Http.OData.Builder;
 using Microsoft.Data.Edm;
-using Smart.Dimdim.Api.Models;
+using Smart.Dimdim.Models;
 
 namespace Smart.Dimdim.Api
 {

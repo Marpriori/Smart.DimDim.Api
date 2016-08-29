@@ -1,11 +1,11 @@
-﻿using Smart.Dimdim.Api.Models.Base;
+﻿using Smart.Dimdim.Models.Base;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
-namespace Smart.Dimdim.Api.Models
+namespace Smart.Dimdim.Models
 {
     public enum TipoContaMovimento {
         Receita = 'R',

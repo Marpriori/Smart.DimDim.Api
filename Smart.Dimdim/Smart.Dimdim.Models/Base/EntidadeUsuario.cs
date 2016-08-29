@@ -1,6 +1,6 @@
-﻿using Smart.Dimdim.Api.Models.Interface;
+﻿using Smart.Dimdim.Models.Interface;
 
-namespace Smart.Dimdim.Api.Models.Base
+namespace Smart.Dimdim.Models.Base
 {
     public class EntidadeUsuario: Entidade, IPorUsuarioModel
     {

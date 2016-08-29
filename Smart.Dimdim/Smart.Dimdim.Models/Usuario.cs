@@ -1,7 +1,7 @@
-﻿using Smart.Dimdim.Api.Models.Base;
+﻿using Smart.Dimdim.Models.Base;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Smart.Dimdim.Api.Models
+namespace Smart.Dimdim.Models
 {
     
     [Table("USUARIO")]
