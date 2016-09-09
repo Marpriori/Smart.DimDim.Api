@@ -1,49 +1,159 @@
 ﻿@model Smart.Dimdim.Models.Login
-
+@using System.Web.Optimization
 @{
     Layout = null;
 }
 
 <!DOCTYPE html>
-
-<html>
+<!--[if IE 8]> <html lang="pt-br" class="ie8 no-js"> <![endif]-->
+<!--[if IE 9]> <html lang="pt-br" class="ie9 no-js"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="pt-br">
+<!--<![endif]-->
 <head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Login</title>
+    <meta charset="utf-8" />
+    <title>Smart-Dimdim | Login</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <meta content="" name="description" />
+    <meta content="Marcio Lima" name="author" />
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet" type="text/css" />
+    @Styles.Render("~/style/global")
+    @Styles.Render("~/style/login")
+    @Styles.Render("~/style/theme")
+    <link rel="shortcut icon" href="favicon.ico" />
 </head>
-<body>
-    @using (Html.BeginForm()) 
-    {
-        @Html.AntiForgeryToken()
-        
-        <div class="form-horizontal">
-            <h4>Login</h4>
-            <hr />
-            @Html.ValidationSummary(true)
-    
+<body class="page-md login">
+    <div class="logo">
+        <a href="~/Login">
+            <img src="../assets/admin/layout4/img/logo-big.png" alt="" />
+        </a>
+    </div>
+    <div class="menu-toggler sidebar-toggler">
+    </div>
+    <div class="content">
+        @using (Html.BeginForm("Index", "Login", new { @class = "login-form" }))
+        {
+            @Html.AntiForgeryToken()
+
+            <h3 class="form-title">Acesse sua conta</h3>
+            <div class="alert alert-danger display-hide">
+                <button class="close" data-close="alert"></button>
+                <span>
+                    Informe e-mail e senha.
+                    @Html.ValidationSummary(true)
+                </span>
+            </div>
             <div class="form-group">
-                @Html.LabelFor(model => model.Email, new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Email)
+                @Html.LabelFor(model => model.Email, new { @class = "control-label visible-ie8 visible-ie9" })
+                
+                <div class="input-icon">
+                    <i class="fa fa-user"></i>
+                    @Html.TextBoxFor(model => model.Email, new { @class = "form-control placeholder-no-fix", autocomplete="off", placeholder="E-mail" })
                     @Html.ValidationMessageFor(model => model.Email)
+                    @*<input class="form-control placeholder-no-fix" type="text" id="email" autocomplete="off" placeholder="E-mail" name="email" />*@
                 </div>
             </div>
-    
             <div class="form-group">
-                @Html.LabelFor(model => model.Senha, new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.PasswordFor(model => model.Senha)
+                @Html.LabelFor(model => model.Senha, new { @class = "control-label visible-ie8 visible-ie9" })
+                <label class="control-label visible-ie8 visible-ie9">Senha</label>
+                <div class="input-icon">
+                    <i class="fa fa-lock"></i>
+                    @Html.PasswordFor(model => model.Senha, new { @class="form-control placeholder-no-fix", autocomplete="off" , placeholder="Senha" })
                     @Html.ValidationMessageFor(model => model.Senha)
+                    @*<input class="form-control placeholder-no-fix" type="password" id="senha" autocomplete="off" placeholder="Senha" name="senha" />*@
                 </div>
             </div>
-    
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Logar" class="btn btn-default" />
-                </div>
+            <div class="form-actions">
+                <label class="checkbox">
+                    <input type="checkbox" name="remember" value="1" /> Lembrar senha
+                </label>
+                <button type="submit" class="submit btn green-haze pull-right">
+                    Entrar <i class="m-icon-swapright m-icon-white"></i>
+                </button>
             </div>
-        </div>
-    }
-    
+
+            <div class="login-options">
+                <h4>Or login with</h4>
+                <ul class="social-icons">
+                    <li>
+                        <a class="facebook" data-original-title="facebook" href="javascript:;">
+                        </a>
+                    </li>
+                    <li>
+                        <a class="twitter" data-original-title="Twitter" href="javascript:;">
+                        </a>
+                    </li>
+                    <li>
+                        <a class="googleplus" data-original-title="Goole Plus" href="javascript:;">
+                        </a>
+                    </li>
+                    <li>
+                        <a class="linkedin" data-original-title="Linkedin" href="javascript:;">
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="forget-password">
+                <h4>Forgot your password ?</h4>
+                <p>
+                    no worries, click <a href="javascript:;" id="forget-password">
+                        here
+                    </a>
+                    to reset your password.
+                </p>
+            </div>
+            <div class="create-account">
+                <p>
+                    Don't have an account yet ?&nbsp; <a href="javascript:;" id="register-btn">
+                        Create an account
+                    </a>
+                </p>
+            </div>
+            
+            @*<div class="form-horizontal">
+                <h4>Login</h4>
+                <hr />
+                @Html.ValidationSummary(true)
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Email, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Email)
+                        @Html.ValidationMessageFor(model => model.Email)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Senha, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.PasswordFor(model => model.Senha)
+                        @Html.ValidationMessageFor(model => model.Senha)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Logar" class="btn btn-default" />
+                    </div>
+                </div>
+            </div>*@
+
+        }
+    </div>
+    @Scripts.Render("~/scripts/ie9")
+    @Scripts.Render("~/scripts/core")
+    @Scripts.Render("~/scripts/page-plugin")
+    @Scripts.Render("~/scripts/page-script")
+    <script>
+        jQuery(document).ready(function () {
+            Metronic.init(); // init metronic core components
+            Layout.init(); // init current layout
+            Login.init();
+            Demo.init();
+        });
+    </script>
 </body>
 </html>
+

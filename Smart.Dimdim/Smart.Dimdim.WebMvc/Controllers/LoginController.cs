@@ -29,8 +29,10 @@ namespace Smart.Dimdim.WebMvc.Controllers
             try
             {
 
-                EfetuarLogin(login);
+                var token = EfetuarLogin(login);
                
+
+
                 return View(login);
             }
             catch
