@@ -2,7 +2,7 @@
 
     var handleLogin = function () {
         var loginForm = $('.login-form');
-
+        console.log("teste");
         loginForm.validate({
             errorElement: 'span', //default input error message container
             errorClass: 'help-block', // default input error message class
@@ -55,47 +55,50 @@
 
         $('.login-form input').keypress(function (e) {
             if (e.which == 13) {
+                console.log("teste");
                 SubmitLogin();
-
+                
                 return false;
             }
         });
 
         $('.login-form .submit').click(function () {
-            SubmitLogin();
+            e.preventDefault();
+            //SubmitLogin();
         });
 
         function SubmitLogin() {
+            preventDefault();
             if (loginForm.validate().form()) {
                 loginForm.submit(); //form validation success, call ajax form submit
             }
         }
 
-        function ValidarLogin() {
-            var settings = {
-                "async": true,
-                "crossDomain": true,
-                "url": "http://smart-dimdim-api.azurewebsites.net/api/Token",
-                "method": "POST",
-                "headers": {
-                    "content-type": "application/json",
-                    "cache-control": "no-cache",
-                },
-                "processData": false,
-                "data": JSON.stringify({
-                    Email: $("#email").val() ,
-                    Senha: $("#senha").val()
-                })
-            }
-            Metronic.blockUI({animate: true});
+        //function ValidarLogin() {
+        //    var settings = {
+        //        "async": true,
+        //        "crossDomain": true,
+        //        "url": "http://smart-dimdim-api.azurewebsites.net/api/Token",
+        //        "method": "POST",
+        //        "headers": {
+        //            "content-type": "application/json",
+        //            "cache-control": "no-cache",
+        //        },
+        //        "processData": false,
+        //        "data": JSON.stringify({
+        //            Email: $("#email").val() ,
+        //            Senha: $("#senha").val()
+        //        })
+        //    }
+        //    Metronic.blockUI({animate: true});
 
-            $.ajax(settings).done(function (response) {
-                console.log(response);
-                Metronic.unblockUI();
-            }).error(function (xmlHttpRequest, codeHttp, mensagem) {
-                console.log(xmlHttpRequest);
-            });
-        }
+        //    $.ajax(settings).done(function (response) {
+        //        console.log(response);
+        //        Metronic.unblockUI();
+        //    }).error(function (xmlHttpRequest, codeHttp, mensagem) {
+        //        console.log(xmlHttpRequest);
+        //    });
+        //}
     }
 
     var handleForgetPassword = function () {

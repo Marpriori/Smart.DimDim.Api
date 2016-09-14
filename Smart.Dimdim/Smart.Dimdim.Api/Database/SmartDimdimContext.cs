@@ -13,8 +13,8 @@ namespace Smart.Dimdim.Api.Database
             : base("name=SmartDimdimContext")
         {
         }
-        public DbSet<Usuario> Usuarios { get; set; }
-        public DbSet<Conta> Contas { get; set; }
+        public System.Data.Entity.DbSet<Smart.Dimdim.Models.Usuario> Usuarios { get; set; }
+        public System.Data.Entity.DbSet<Smart.Dimdim.Models.Conta> Contas { get; set; }
 
         public System.Data.Entity.DbSet<Smart.Dimdim.Models.Cartao> Cartaos { get; set; }
 

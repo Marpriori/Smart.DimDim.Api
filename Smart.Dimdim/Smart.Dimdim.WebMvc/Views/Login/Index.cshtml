@@ -41,8 +41,10 @@
             <div class="alert alert-danger display-hide">
                 <button class="close" data-close="alert"></button>
                 <span>
-                    Informe e-mail e senha.
                     @Html.ValidationSummary(true)
+                    @Html.ValidationMessageFor(model => model.Email)
+                    @Html.ValidationMessageFor(model => model.Senha)
+                    
                 </span>
             </div>
             <div class="form-group">
@@ -51,7 +53,7 @@
                 <div class="input-icon">
                     <i class="fa fa-user"></i>
                     @Html.TextBoxFor(model => model.Email, new { @class = "form-control placeholder-no-fix", autocomplete="off", placeholder="E-mail" })
-                    @Html.ValidationMessageFor(model => model.Email)
+                    
                     @*<input class="form-control placeholder-no-fix" type="text" id="email" autocomplete="off" placeholder="E-mail" name="email" />*@
                 </div>
             </div>
@@ -61,7 +63,7 @@
                 <div class="input-icon">
                     <i class="fa fa-lock"></i>
                     @Html.PasswordFor(model => model.Senha, new { @class="form-control placeholder-no-fix", autocomplete="off" , placeholder="Senha" })
-                    @Html.ValidationMessageFor(model => model.Senha)
+                    
                     @*<input class="form-control placeholder-no-fix" type="password" id="senha" autocomplete="off" placeholder="Senha" name="senha" />*@
                 </div>
             </div>
